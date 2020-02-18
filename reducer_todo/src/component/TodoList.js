@@ -9,6 +9,15 @@ export default function TodoList() {
     event.preventDefault();
     dispatch({ type: "ADD_TODO" });
   };
+
+  const handleChange = (event) => {
+    dispatch({
+      type: "UPDATING",
+      field: "title",
+      payload: { letter: event.target.value, id: Date.now() }
+    });
+  };
+
   return (
     <>
       <h1>TodoList</h1>
@@ -17,13 +26,7 @@ export default function TodoList() {
         <input
           type="text"
           id="newTodo"
-          onChange={(e) =>
-            dispatch({
-              type: "UPDATING",
-              field: "title",
-              payload: { letter: e.target.value, id: Date.now() }
-            })
-          }
+          onChange={handleChange}
           placeholder="New Task"
           value={newTodo.title}
         />

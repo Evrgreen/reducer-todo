@@ -1,7 +1,8 @@
 const newTodoInitial = {
   title: "",
   completed: false,
-  desc: ""
+  desc: "",
+  editing: false
 };
 
 export const todoInitialState = {
@@ -14,7 +15,8 @@ export const todoInitialState = {
       completeBy: "",
       desc: "",
       tags: [],
-      id: 15
+      id: 15,
+      editing: false
     }
   ]
 };
@@ -53,14 +55,17 @@ export const todoReducer = (state, action) => {
     case "DELETE": {
       return {
         ...state,
-        todos: todos.map((item) => {
+        todos: todos.filter((item) => {
           console.log(item);
           if (!(item.id === payload.id)) {
             console.log("Gottem");
+            return item;
           }
-          return item;
         })
       };
+    }
+    case "UPDATING": {
+      return;
     }
   }
 };
